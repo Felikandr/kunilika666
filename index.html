@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunilika - Огненная Сукубьшка</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --pink: #D50272;
+            --light-pink: #ff4da6;
+            --hot-pink: #ff1493;
+            --cream: #fffdd0;
+            --font-sexy: 'Playfair Display', serif;
+            --font-modern: 'Raleway', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--black);
+            color: #fff;
+            font-family: var(--font-modern);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Анимации */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px var(--pink); }
+            50% { box-shadow: 0 0 20px var(--pink), 0 0 30px var(--light-pink); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Шапка */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--pink);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 0.8rem 2rem;
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 5px 20px rgba(213, 2, 114, 0.3);
+        }
+
+        .logo {
+            font-family: var(--font-sexy);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--pink);
+            text-decoration: none;
+            position: relative;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 8px;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover i {
+            transform: rotate(15deg);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--pink);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 10px var(--pink);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.8rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-sexy);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pink);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--pink);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--pink);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Главный экран */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(26, 0, 13, 0.9)), url('https://i.postimg.cc/nz16GHTk/104-20251018114332.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-family: var(--font-sexy);
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px #D50272;
+            background: linear-gradient(45deg, #ff0066, #D50272, #b3005e, #ff1a8c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 1.5s infinite;
+            position: relative;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: var(--pink);
+            box-shadow: 0 0 10px var(--pink);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--light-pink);
+            font-style: italic;
+            margin-bottom: 2rem;
+            animation: flicker 2s infinite;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            bottom: 2rem;
+            font-size: 2rem;
+            animation: heartbeat 2s infinite;
+            cursor: pointer;
+            color: var(--pink);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-arrow:hover {
+            transform: scale(1.2);
+        }
+
+        /* Разделы */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: var(--font-sexy);
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--pink);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--pink), transparent);
+        }
+
+        /* О стримерше */
+        .about {
+            background: var(--dark-gray);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: var(--black);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--pink);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Магазин */
+        .shop {
+            background: var(--black);
+        }
+
+        .products {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product {
+            background: var(--dark-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--pink);
+            transition: all 0.3s ease;
+            
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(213, 2, 114, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: var(--black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: var(--pink);
+            cursor: pointer;
+            
+        }
+        
+        @keyframes bounce {
+    0%, 100% { 
+        transform: translateZ(0) scale(1);
+    }
+    25% { 
+        transform: translateZ(-15px) scale(1.4);
+    }
+    50% { 
+        transform: translateZ(0) scale(1.15);
+    }
+    75% { 
+        transform: translateZ(-8px) scale(1.25);
+    }
+}
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-family: var(--font-sexy);
+            font-size: 1.3rem;
+            color: var(--light-pink);
+            margin-bottom: 0.5rem;
+            
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: var(--pink);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .buy-button, .view-button {
+            flex: 1;
+            border: none;
+            padding: 0.7rem 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-modern);
+            font-weight: 500;
+        }
+
+        .buy-button {
+            background: var(--pink);
+            color: white;
+        }
+
+        .buy-button:hover {
+            background: var(--light-pink);
+            transform: scale(1.05);
+        }
+
+        .view-button {
+            background: transparent;
+            color: var(--pink);
+            border: 1px solid var(--pink);
+        }
+
+        .view-button:hover {
+            background: rgba(213, 2, 114, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Фетиши */
+        .fetishes {
+            background: var(--dark-gray);
+        }
+
+        .fetish-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .fetish-item {
+            background: var(--black);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--pink);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .fetish-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .fetish-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--pink);
+            min-width: 30px;
+        }
+
+        /* Хронология */
+        .timeline {
+            background: var(--black);
+            position: relative;
+        }
+
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-path {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, transparent, var(--pink), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-path::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--light-pink), transparent);
+            animation: flicker 3s infinite;
+        }
+
+        .timeline-item {
+            margin: 3rem 0;
+            position: relative;
+            width: 45%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--pink);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: -12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px var(--pink);
+        }
+
+        .timeline-item:hover .timeline-marker {
+            transform: translateY(-50%) scale(1.3);
+            box-shadow: 0 0 15px var(--pink);
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -12px;
+            right: auto;
+        }
+
+        .timeline-content {
+            background: var(--dark-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--pink);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-date {
+            font-family: var(--font-sexy);
+            color: var(--light-pink);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .timeline-date::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--pink);
+        }
+
+        /* Соцсети */
+        .socials {
+            background: var(--dark-gray);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--pink);
+            transform: translateY(-5px);
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Призыв к действию */
+        .cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            background: var(--black);
+        }
+
+        .cta-title {
+            font-family: var(--font-sexy);
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--pink);
+            position: relative;
+            display: inline-block;
+        }
+
+        .cta-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--pink), transparent);
+        }
+
+        .message-button {
+            background: linear-gradient(45deg, var(--pink), var(--light-pink));
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            color: white;
+            font-family: var(--font-sexy);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: glow 2s infinite;
+        }
+
+        .message-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--pink);
+        }
+
+        /* Подвал */
+        .footer {
+            background: var(--black);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--pink);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--pink), transparent);
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--dark-gray);
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            border: 2px solid var(--pink);
+            box-shadow: 0 0 30px rgba(213, 2, 114, 0.5);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--pink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-family: var(--font-sexy);
+            color: var(--pink);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--pink);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-image-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-image.zoomed {
+            transform: scale(1.5);
+            cursor: zoom-out;
+        }
+
+        .zoom-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .modal-image-container:hover .zoom-indicator {
+            opacity: 1;
+        }
+
+        .modal-description {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-price {
+            font-size: 1.3rem;
+            color: var(--pink);
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-buy-button {
+            flex: 1;
+            background: var(--pink);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-modern);
+            font-weight: 500;
+        }
+
+        .modal-buy-button:hover {
+            background: var(--light-pink);
+            transform: scale(1.05);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                width: 90%;
+                left: 5% !important;
+            }
+            
+            .timeline-marker {
+                display: none;
+            }
+            
+            .nav {
+                display: none;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+            
+            .product-buttons {
+                flex-direction: column;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+            
+            .modal-image.zoomed {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Дополнительные элементы */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            color: rgba(213, 2, 114, 0.1);
+            font-size: 2rem;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+
+        .cursor-follower.visible {
+            opacity: 0.5;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Эффект следования за курсором -->
+    <div class="cursor-follower"></div>
+
+    <!-- Плавающие элементы -->
+    <div class="floating-elements">
+        <div class="floating-element" style="top: 10%; left: 5%; animation-delay: 0s;"><i class="fas fa-fire"></i></div>
+        <div class="floating-element" style="top: 20%; left: 90%; animation-delay: 2s;"><i class="fas fa-kiss-wink-heart"></i></div>
+        <div class="floating-element" style="top: 50%; left: 10%; animation-delay: 4s;"><i class="fas fa-heart"></i></div>
+        <div class="floating-element" style="top: 70%; left: 85%; animation-delay: 6s;"><i class="fas fa-gamepad"></i></div>
+        <div class="floating-element" style="top: 85%; left: 15%; animation-delay: 8s;"><i class="fas fa-crown"></i></div>
+    </div>
+
+    <!-- Модальные окна для товаров -->
+    <div class="modal" id="productModal1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Подушка Длиная "Kunilika"</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img src="https://kunilika666.ru/__scale/uploads/s/a/c/t/actsvhtnbsyt/img/l7FXomeF.png?quality=60&width=467&webp=1" alt="Подушка Длиная "Kunilika"" class="modal-image">
+                    <div class="zoom-indicator">Нажми для увеличения</div>
+                </div>
+                <p class="modal-description">
+ Размерность: 50x150;
+Материал чехла: Спанбонд;
+Материал наполнителя: Холлофайбер;
+Гипоаллергенно  ;
+</p>
+                <div class="modal-price">1,499 ₽</div>
+                <div class="modal-buttons">
+                    <button class="modal-buy-button">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="productModal2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Кружка "Kunilika"</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img src="https://kunilika666.ru/__scale/uploads/s/a/c/t/actsvhtnbsyt/img/full_PBXz2NNo.png?quality=60&width=720&webp=1" alt="Эксклюзивные фото" class="modal-image">
+                    <div class="zoom-indicator">Нажми для увеличения</div>
+                </div>
+                <p class="modal-description">Премиальная керамика высшего качества
+Яркий, стойкий рисунок, который не потускнеет со временем
+Объём 350 мл – достаточно для самых горячих напитков
+Идеальная форма для комфортного использования </p>
+                <div class="modal-price">999 ₽</div>
+                <div class="modal-buttons">
+                    <button class="modal-buy-button">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="productModal3">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Коврик "Kunilika"</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img src="https://kunilika666.ru/__scale/uploads/s/a/c/t/actsvhtnbsyt/img/full_UFgXK3yn.jpg?quality=60&width=720&webp=1" alt="Личное видео" class="modal-image">
+                    <div class="zoom-indicator">Нажми для увеличения</div>
+                </div>
+                <p class="modal-description">Поверхность гладкая как шёлк
+Дизайн, от которого захватывает дух
+Размеры, 90х40 - 70х30 - 60х40</p>
+                <div class="modal-price">2,499 ₽</div>
+                <div class="modal-buttons">
+                    <button class="modal-buy-button">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="productModal4">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Наловочка "Kunilika"</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img src="https://kunilika666.ru/__scale/uploads/s/a/c/t/actsvhtnbsyt/img/W15o3hyF.jpg?quality=60&width=720&webp=1" alt="Кремовый сет" class="modal-image">
+                    <div class="zoom-indicator">Нажми для увеличения</div>
+                </div>
+                <p class="modal-description">Нежная ткань, ласкающая кожу
+Идеальный размер для самых тесных объятий
+Долговечный принт, который останется ярким</p>
+                <div class="modal-price">3,999 ₽</div>
+                <div class="modal-buttons">
+                    <button class="modal-buy-button">Купить сейчас</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="header" id="header">
+        <a href="#" class="logo"><i class="fas fa-fire"></i>Kunilika</a>
+        <nav class="nav">
+            <a href="#" class="nav-link active">Главная</a>
+            <a href="#about" class="nav-link">Обо мне</a>
+            <a href="#shop" class="nav-link">Магазин</a>
+            <a href="#fetishes" class="nav-link">Мои фетиши</a>
+            <a href="#timeline" class="nav-link">Хронология</a>
+            <a href="#socials" class="nav-link">Соцсети</a>
+        </nav>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <h1 class="hero-title">Kunilika <i class="fas fa-fire"></i><br>Суккуб няшка, что ждет тебя~</h1>
+        <p class="hero-subtitle">Люблю мужские взгляды и белый крем... Приготовься!</p>
+        <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- О стримерше -->
+    <section id="about" class="section about">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Привет, малыш! Я Kunilika - суккуб няшка, что обожает внимание мужчин. Мои стримы - это смесь игр, откровенных нарядов и флирта с моими подписчиками.</p>
+                <p>Обожаю, когда на меня смотрят... и знают, что я наслаждаюсь каждым взглядом. А ещё я большая поклонница белого мужского крема - он такой вкусный!</p>
+                <p>Присоединяйся к моему сообществу, и я покажу тебе, на что способна настоящая сукубьшка.</p>
+            </div>
+            <div class="about-image">
+                <!-- Замените на ваше фото -->
+                <img src="https://i.postimg.cc/zvcDpXvL/20251018-112508.jpg" alt="Kunilika">
+            </div>
+        </div>
+    </section>
+
+    <!-- Магазин -->
+    <section id="shop" class="section shop">
+        <h2 class="section-title">Мой магазин</h2>
+        <div class="products">
+            <div class="product">
+                <div class="product-image" data-modal="productModal1">
+                    <i class="fa-solid fa-mattress-pillow" style="animation: bounce 2.5s infinite;"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Подушка Длиная "Kunilika"</h3>
+                    <p>❤️ Длинная подушка — партнер для сна ростом с ваши амбиции!</p>
+                    <div class="product-price">1,499 ₽</div>
+                    <div class="product-buttons">
+                        <button class="buy-button">Купить</button>
+                        <button class="view-button" data-modal="productModal1">Посмотреть</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image" data-modal="productModal2">
+               <i class="fa fa-coffee" style="animation: bounce 2.5s infinite;"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Кружка "Kunilika"</h3>
+                    <p>❤️Кружка для истинных ценителей острых ощущений!Хотите добавить перчинку в свой утренний кофе? Эта керамическая красотка станет вашим персональным источником возбуждения и хорошего настроения! </p>
+                    <div class="product-price">999 ₽</div>
+                    <div class="product-buttons">
+                        <button class="buy-button">Купить</button>
+                        <button class="view-button" data-modal="productModal2">Посмотреть</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image" data-modal="productModal3">
+                    <i class="fas fa-gamepad" style="animation: bounce 2.5s infinite;"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Коврик "Kunilika"</h3>
+                    <p>
+❤️ Не откладывайте удовольствие на потом – сделайте свой рабочий стол горячее уже сегодня!
+</p>
+                    <div class="product-price">2,499 ₽</div>
+                    <div class="product-buttons">
+                        <button class="buy-button">Купить</button>
+                        <button class="view-button" data-modal="productModal3">Посмотреть</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image" data-modal="productModal4" >
+                    <i class="fas fa-layer-group" style="animation: bounce 2.5s infinite;"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Наловочка  для Дакимакуры "Kunilika"</h3>
+                    <p>❤️С таким принтом даже                                                     
+«Ночь становится ярче»</p>
+                    <div class="product-price">3,999 ₽</div>
+                    <div class="product-buttons">
+                        <button class="buy-button">Купить</button>
+                        <button class="view-button" data-modal="productModal4">Посмотреть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Фетиши -->
+    <section id="fetishes" class="section fetishes">
+        <h2 class="section-title">Мои фетиши</h2>
+        <div class="fetish-list">
+            <div class="fetish-item">
+                <span class="fetish-icon"><i class="fas fa-eye"></i></span>
+                <div>
+                    <strong>Мужские взгляды</strong> - Обожаю чувствовать на себе взгляды мужчин. Знать, что они смотрят на меня и желают меня...
+                </div>
+            </div>
+            <div class="fetish-item">
+                <span class="fetish-icon"><i class="fas fa-ice-cream"></i></span>
+                <div>
+                    <strong>Белый крем</strong> - Мой самый любимый... Особенно мужской. Такой вкусный и питательный!
+                </div>
+            </div>
+            <div class="fetish-item">
+                <span class="fetish-icon"><i class="fas fa-gamepad"></i></span>
+                <div>
+                    <strong>Игры с подписчиками</strong> - Люблю, когда мы играем вместе, а я могу немного пофлиртовать...
+                </div>
+            </div>
+            <div class="fetish-item">
+                <span class="fetish-icon"><i class="fas fa-crown"></i></span>
+                <div>
+                    <strong>Власть над мужчинами</strong> - Знать, что я могу заставить любого мужчину желать меня - это так возбуждает!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Хронология -->
+    <section id="timeline" class="section timeline">
+        <h2 class="section-title">Мой путь</h2>
+        <div class="timeline-container">
+            <div class="timeline-path"></div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Начало - Март 2023</div>
+                    <p>Первый стрим. Скромная, но уже с намёком на то, кем стану...</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Первый успех - Июль 2023</div>
+                    <p>1000 подписчиков! Начинаю понимать, что мужчины любят меня смотреть.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Раскрытие - Ноябрь 2023</div>
+                    <p>Первый откровенный стрим. Мужчины сходят с ума, а я наслаждаюсь вниманием.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Признание - Февраль 2024</div>
+                    <p>10,000 подписчиков! Теперь я знаю свою силу и как ею пользоваться.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Настоящее время</div>
+                    <p>Продолжаю радовать своих подписчиков и открывать новые грани своей натуры.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Соцсети -->
+    <section id="socials" class="section socials">
+        <h2 class="section-title">Мои соцсети</h2>
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <span class="social-icon"><i class="fab fa-twitch"></i></span>
+                <span>Twitch</span>
+            </a>
+            <a href="#" class="social-link">
+                <span class="social-icon"><i class="fab fa-twitter"></i></span>
+                <span>Twitter</span>
+            </a>
+            <a href="#" class="social-link">
+                <span class="social-icon"><i class="fab fa-instagram"></i></span>
+                <span>Instagram</span>
+            </a>
+            <a href="#" class="social-link">
+                <span class="social-icon"><i class="fab fa-telegram"></i></span>
+                <span>Telegram</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="cta">
+        <h2 class="cta-title">Хочешь узнать меня поближе?</h2>
+        <button class="message-button" id="messageButton"><i class="fas fa-paper-plane"></i> Написать мне в ЛС</button>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="footer-note">Kunilika © 2023. Все права защищены. Только для взрослых.</div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Убираем активный класс со всех ссылок
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Добавляем активный класс к текущей ссылке
+                this.classList.add('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Анимация стрелки прокрутки
+        document.querySelector('.scroll-arrow').addEventListener('click', function() {
+            document.querySelector('#about').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Кнопка сообщения
+        const messageButton = document.getElementById('messageButton');
+        messageButton.addEventListener('click', function() {
+            alert('Kunilika ждет твоего сообщения! Ссылка на ЛС: t.me/kunilika');
+        });
+
+        // Эффект следования за курсором
+        const cursorFollower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+            cursorFollower.classList.add('visible');
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('visible');
+        });
+
+        // Изменение шапки при скролле
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Анимация появления элементов при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Применяем анимацию к элементам
+        document.querySelectorAll('.timeline-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Модальные окна
+        const viewButtons = document.querySelectorAll('.view-button, .product-image');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+
+        // Открытие модального окна
+        viewButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Закрытие модального окна
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                // Сбрасываем увеличение изображения при закрытии
+                const modalImage = modal.querySelector('.modal-image');
+                if (modalImage.classList.contains('zoomed')) {
+                    modalImage.classList.remove('zoomed');
+                }
+            });
+        });
+
+        // Закрытие модального окна при клике вне его
+        modals.forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    // Сбрасываем увеличение изображения при закрытии
+                    const modalImage = this.querySelector('.modal-image');
+                    if (modalImage && modalImage.classList.contains('zoomed')) {
+                        modalImage.classList.remove('zoomed');
+                    }
+                }
+            });
+        });
+
+        // Закрытие модального окна при нажатии Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                modals.forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    // Сбрасываем увеличение изображения при закрытии
+                    const modalImage = modal.querySelector('.modal-image');
+                    if (modalImage && modalImage.classList.contains('zoomed')) {
+                        modalImage.classList.remove('zoomed');
+                    }
+                });
+            }
+        });
+
+        // Увеличение изображения в модальном окне
+        document.querySelectorAll('.modal-image').forEach(image => {
+            image.addEventListener('click', function() {
+                this.classList.toggle('zoomed');
+                
+                // Если изображение увеличено, меняем курсор на "уменьшить"
+                if (this.classList.contains('zoomed')) {
+                    this.style.cursor = 'zoom-out';
+                    
+                    // Прокручиваем к изображению при увеличении (для мобильных устройств)
+                    if (window.innerWidth <= 768) {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else {
+                    this.style.cursor = 'zoom-in';
+                }
+            });
+        });
+
+        // Закрытие увеличенного изображения при клике вне его (только для ПК)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth > 768) {
+                const zoomedImages = document.querySelectorAll('.modal-image.zoomed');
+                zoomedImages.forEach(image => {
+                    if (!image.contains(e.target) && !e.target.classList.contains('modal-image')) {
+                        image.classList.remove('zoomed');
+                        image.style.cursor = 'zoom-in';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
